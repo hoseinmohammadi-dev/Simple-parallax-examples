@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fixed Scroll Example</title>
+<style>
+  body {
+    margin: 0;
+    font-family: sans-serif;
+  }
+
+  section {
+    height: 100vh;
+    position: relative;
+  }
+
+  .slide {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    color: white;
+    transition: opacity 0.5s ease;
+  }
+
+  #slide1 { background: #e74c3c; }
+  #slide2 { background: #3498db; }
+  #slide3 { background: #2ecc71; }
+</style>
+</head>
+
+<body>
+
+<section id="sec1"></section>
+<section id="sec2"></section>
+<section id="sec3"></section>
+
+<div id="slide1" class="slide">Slide 1</div>
+<div id="slide2" class="slide">Slide 2</div>
+<div id="slide3" class="slide">Slide 3</div>
+
+</body>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const sections = document.querySelectorAll('section');
+
+window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY;
+  
+  sections.forEach((sec, index) => {
+    const start = sec.offsetTop;
+    const end = start + sec.offsetHeight;
+
+    if (scrollY >= start && scrollY < end) {
+      slides[index].style.opacity = '1';
+    } else {
+      slides[index].style.opacity = '0';
+    }
+  });
+});
+</script>
+</html>
